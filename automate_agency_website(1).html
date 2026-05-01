@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NexFlow AI — Automate Everything. Scale Without Limits.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --surface3: #22222f;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --accent: #00e5a0;
+    --accent2: #7c5cfc;
+    --accent3: #ff6b35;
+    --text: #f0f0f8;
+    --muted: #9090a8;
+    --muted2: #6060780;
+    --card-bg: rgba(255,255,255,0.03);
+    --radius: 12px;
+    --radius-lg: 20px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--black);
+    color:var(--text);
+    font-family:'DM Sans',sans-serif;
+    font-size:16px;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.15}
+
+  /* ─── NAV ─── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 5%;
+    background:rgba(10,10,15,0.85);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid var(--border);
+  }
+  .logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent);letter-spacing:-0.5px}
+  .logo span{color:var(--text)}
+  .nav-links{display:flex;gap:32px;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{
+    background:var(--accent);color:var(--black);
+    padding:10px 22px;border-radius:8px;
+    font-weight:700;font-size:14px;text-decoration:none;
+    font-family:'Syne',sans-serif;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,229,160,0.3)}
+  .lang-btn{
+    background:transparent;border:1px solid var(--border2);color:var(--muted);
+    padding:8px 14px;border-radius:8px;font-size:13px;cursor:pointer;
+    margin-right:12px;transition:all .2s;
+  }
+  .lang-btn:hover{border-color:var(--accent);color:var(--accent)}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+  .hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+
+  /* ─── HERO ─── */
+  #hero{
+    min-height:100vh;
+    display:flex;align-items:center;justify-content:center;
+    text-align:center;
+    padding:120px 5% 80px;
+    position:relative;overflow:hidden;
+  }
+  .hero-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.04) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,229,160,0.04) 1px,transparent 1px);
+    background-size:60px 60px;
+    mask-image:radial-gradient(ellipse 80% 60% at 50% 50%,black 30%,transparent 100%);
+  }
+  .hero-glow{
+    position:absolute;
+    width:700px;height:700px;
+    background:radial-gradient(ellipse,rgba(124,92,252,0.12) 0%,transparent 70%);
+    top:50%;left:50%;transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .hero-content{position:relative;z-index:2;max-width:860px}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.25);
+    padding:8px 18px;border-radius:100px;
+    font-size:13px;color:var(--accent);margin-bottom:32px;
+  }
+  .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+  h1.hero-title{
+    font-size:clamp(42px,7vw,88px);
+    font-weight:800;
+    letter-spacing:-2px;
+    line-height:1.05;
+    margin-bottom:24px;
+  }
+  .hero-title .highlight{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero-sub{font-size:19px;color:var(--muted);max-width:620px;margin:0 auto 48px;font-weight:300}
+  .hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .btn-primary{
+    background:var(--accent);color:var(--black);
+    padding:16px 36px;border-radius:10px;
+    font-weight:700;font-size:16px;text-decoration:none;
+    font-family:'Syne',sans-serif;
+    transition:transform .2s,box-shadow .2s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,229,160,0.35)}
+  .btn-secondary{
+    background:transparent;color:var(--text);
+    padding:16px 36px;border-radius:10px;
+    font-weight:600;font-size:16px;text-decoration:none;
+    font-family:'Syne',sans-serif;
+    border:1px solid var(--border2);
+    transition:all .2s;
+  }
+  .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+  .hero-stats{
+    display:flex;gap:48px;justify-content:center;
+    margin-top:72px;padding-top:48px;
+    border-top:1px solid var(--border);
+    flex-wrap:wrap;
+  }
+  .stat-item{text-align:center}
+  .stat-num{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent)}
+  .stat-label{font-size:13px;color:var(--muted);margin-top:4px}
+
+  /* ─── SECTION BASE ─── */
+  section{padding:100px 5%}
+  .section-label{
+    font-size:12px;font-weight:700;letter-spacing:3px;
+    color:var(--accent);text-transform:uppercase;margin-bottom:16px;
+  }
+  .section-title{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-1px;margin-bottom:20px}
+  .section-sub{font-size:17px;color:var(--muted);max-width:560px;line-height:1.7}
+  .section-header{margin-bottom:64px}
+  .section-header.centered{text-align:center}
+  .section-header.centered .section-sub{margin:0 auto}
+
+  /* ─── WHY / CONVERSION ─── */
+  #why{background:var(--surface)}
+  .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:64px}
+  .why-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:32px;
+    transition:border-color .3s,transform .3s;
+    position:relative;overflow:hidden;
+  }
+  .why-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    opacity:0;transition:opacity .3s;
+  }
+  .why-card:hover{border-color:var(--border2);transform:translateY(-4px)}
+  .why-card:hover::before{opacity:1}
+  .why-icon{
+    width:48px;height:48px;border-radius:12px;
+    background:rgba(0,229,160,0.1);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin-bottom:20px;
+  }
+  .why-card h3{font-size:20px;font-weight:700;margin-bottom:12px}
+  .why-card p{font-size:15px;color:var(--muted);line-height:1.65}
+  .savings-callout{
+    background:linear-gradient(135deg,rgba(0,229,160,0.08),rgba(124,92,252,0.08));
+    border:1px solid rgba(0,229,160,0.2);
+    border-radius:var(--radius-lg);padding:48px;
+    display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+    margin-top:48px;
+  }
+  .savings-callout h3{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:12px}
+  .savings-callout p{color:var(--muted);font-size:16px}
+  .savings-nums{display:flex;gap:48px}
+  .snum .val{font-family:'Syne',sans-serif;font-size:42px;font-weight:800;color:var(--accent)}
+  .snum .lbl{font-size:13px;color:var(--muted)}
+
+  /* ─── SEARCH / AUTOMATION STORE ─── */
+  #automations{background:var(--black)}
+  .search-bar{
+    display:flex;gap:12px;margin-bottom:48px;
+    background:var(--surface);border:1px solid var(--border2);
+    border-radius:12px;padding:8px 8px 8px 20px;
+    align-items:center;
+  }
+  .search-bar input{
+    flex:1;background:none;border:none;outline:none;
+    color:var(--text);font-size:16px;font-family:'DM Sans',sans-serif;
+  }
+  .search-bar input::placeholder{color:var(--muted)}
+  .search-btn{
+    background:var(--accent);color:var(--black);
+    border:none;padding:12px 24px;border-radius:8px;
+    font-weight:700;font-size:14px;cursor:pointer;
+    font-family:'Syne',sans-serif;transition:opacity .2s;
+  }
+  .search-btn:hover{opacity:0.85}
+  .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+  .filter-tab{
+    padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;
+    border:1px solid var(--border);background:transparent;color:var(--muted);
+    cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
+  }
+  .filter-tab.active,.filter-tab:hover{
+    background:var(--accent);color:var(--black);border-color:var(--accent);
+  }
+  .automation-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;
+  }
+  .automation-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:28px;
+    transition:all .3s;cursor:pointer;
+    display:flex;flex-direction:column;
+  }
+  .automation-card:hover{border-color:rgba(0,229,160,0.3);background:var(--surface2)}
+  .auto-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
+  .auto-icon{
+    width:44px;height:44px;border-radius:10px;
+    display:flex;align-items:center;justify-content:center;font-size:20px;
+  }
+  .auto-badge{
+    font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;
+    letter-spacing:0.5px;
+  }
+  .badge-mrr{background:rgba(0,229,160,0.12);color:var(--accent)}
+  .badge-popular{background:rgba(255,107,53,0.12);color:#ff6b35}
+  .badge-new{background:rgba(124,92,252,0.12);color:#a78bfa}
+  .auto-title{font-size:17px;font-weight:700;margin-bottom:8px}
+  .auto-desc{font-size:14px;color:var(--muted);flex:1;margin-bottom:20px;line-height:1.6}
+  .auto-footer{display:flex;justify-content:space-between;align-items:center}
+  .auto-price{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent)}
+  .auto-price span{font-size:12px;color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif}
+  .auto-buy{
+    background:var(--surface3);color:var(--text);border:1px solid var(--border2);
+    padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;
+    cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
+  }
+  .auto-buy:hover{background:var(--accent);color:var(--black);border-color:var(--accent)}
+
+  /* ─── PACKAGES ─── */
+  #packages{background:var(--surface)}
+  .pkg-toggle{
+    display:flex;background:var(--surface2);border:1px solid var(--border);
+    border-radius:100px;padding:4px;
+    width:fit-content;margin:0 auto 64px;
+  }
+  .pkg-toggle-btn{
+    padding:10px 28px;border-radius:100px;font-size:14px;font-weight:600;
+    border:none;background:transparent;color:var(--muted);cursor:pointer;
+    transition:all .3s;font-family:'Syne',sans-serif;
+  }
+  .pkg-toggle-btn.active{background:var(--accent);color:var(--black)}
+  .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+  .pkg-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:36px;
+    position:relative;transition:transform .3s;
+  }
+  .pkg-card:hover{transform:translateY(-4px)}
+  .pkg-card.featured{
+    border-color:var(--accent);
+    background:linear-gradient(135deg,rgba(0,229,160,0.05),rgba(124,92,252,0.05));
+  }
+  .pkg-popular{
+    position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+    background:var(--accent);color:var(--black);
+    padding:6px 20px;border-radius:100px;font-size:12px;font-weight:700;
+    font-family:'Syne',sans-serif;white-space:nowrap;
+  }
+  .pkg-name{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:var(--muted);margin-bottom:12px}
+  .pkg-price{font-family:'Syne',sans-serif;font-size:48px;font-weight:800;letter-spacing:-2px;margin-bottom:4px}
+  .pkg-price .currency{font-size:24px;vertical-align:super}
+  .pkg-period{font-size:14px;color:var(--muted);margin-bottom:8px}
+  .pkg-tagline{font-size:15px;color:var(--muted);margin-bottom:28px;line-height:1.5}
+  .pkg-features{list-style:none;margin-bottom:32px}
+  .pkg-features li{
+    display:flex;align-items:flex-start;gap:10px;
+    font-size:14px;padding:8px 0;border-bottom:1px solid var(--border);
+    color:var(--muted);
+  }
+  .pkg-features li:last-child{border-bottom:none}
+  .pkg-features li .check{color:var(--accent);flex-shrink:0;margin-top:2px}
+  .pkg-btn{
+    display:block;text-align:center;
+    padding:14px;border-radius:10px;
+    font-weight:700;font-size:15px;text-decoration:none;
+    font-family:'Syne',sans-serif;transition:all .2s;
+    border:1px solid var(--border2);color:var(--text);background:transparent;
+    cursor:pointer;width:100%;
+  }
+  .pkg-btn.primary{background:var(--accent);color:var(--black);border-color:var(--accent)}
+  .pkg-btn:hover{opacity:0.85;transform:translateY(-1px)}
+  .industry-section{margin-top:80px}
+  .industry-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+
+  /* ─── CUSTOM AUTOMATION ─── */
+  #custom{background:var(--black)}
+  .custom-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .custom-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px}
+  .form-group{margin-bottom:20px}
+  .form-group label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:8px;letter-spacing:0.5px}
+  .form-group input,.form-group textarea,.form-group select{
+    width:100%;background:var(--surface2);border:1px solid var(--border);
+    border-radius:8px;padding:12px 16px;color:var(--text);
+    font-size:15px;font-family:'DM Sans',sans-serif;
+    outline:none;transition:border-color .2s;
+  }
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--accent)}
+  .form-group textarea{resize:vertical;min-height:100px}
+  .form-group select option{background:var(--surface2)}
+  .custom-submit{
+    background:var(--accent);color:var(--black);
+    border:none;width:100%;padding:14px;border-radius:10px;
+    font-weight:700;font-size:16px;cursor:pointer;
+    font-family:'Syne',sans-serif;transition:opacity .2s;
+  }
+  .custom-submit:hover{opacity:0.85}
+  .dev-cards{display:grid;gap:16px;margin-top:32px}
+  .dev-card{
+    background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:20px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .dev-avatar{
+    width:48px;height:48px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent2),var(--accent));
+    flex-shrink:0;display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:16px;color:white;
+  }
+  .dev-name{font-weight:600;font-size:15px;margin-bottom:2px}
+  .dev-spec{font-size:13px;color:var(--muted)}
+  .dev-stars{color:#fbbf24;font-size:12px;margin-top:4px}
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials{background:var(--surface)}
+  .testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+  .testi-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:32px;
+  }
+  .testi-stars{color:#fbbf24;font-size:14px;margin-bottom:16px;letter-spacing:2px}
+  .testi-quote{font-size:15px;line-height:1.75;color:var(--text);margin-bottom:24px}
+  .testi-author{display:flex;align-items:center;gap:12px}
+  .testi-avatar{
+    width:42px;height:42px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;font-size:14px;flex-shrink:0;
+  }
+  .testi-name{font-weight:600;font-size:14px}
+  .testi-role{font-size:12px;color:var(--muted)}
+  .testi-stat{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.2);
+    padding:6px 14px;border-radius:100px;font-size:13px;color:var(--accent);
+    margin-bottom:20px;font-weight:600;
+  }
+
+  /* ─── CRM / FOLLOW UP ─── */
+  #crm{background:var(--black)}
+  .crm-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;margin-top:64px;position:relative}
+  .crm-flow::before{
+    content:'';position:absolute;top:32px;left:10%;right:10%;
+    height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  }
+  .crm-step{text-align:center;padding:32px 20px;position:relative}
+  .crm-num{
+    width:64px;height:64px;border-radius:50%;
+    background:var(--surface);border:2px solid var(--accent);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--accent);
+    margin:0 auto 20px;position:relative;z-index:2;
+  }
+  .crm-step h4{font-size:16px;font-weight:700;margin-bottom:8px}
+  .crm-step p{font-size:13px;color:var(--muted);line-height:1.6}
+
+  /* ─── SOCIALS ─── */
+  #socials{background:var(--surface)}
+  .socials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:48px}
+  .social-card{
+    background:var(--card-bg);border:1px solid var(--border);
+    border-radius:var(--radius-lg);padding:28px;text-align:center;
+    text-decoration:none;color:var(--text);
+    transition:all .3s;
+  }
+  .social-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .social-icon{font-size:32px;margin-bottom:12px}
+  .social-name{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:4px}
+  .social-handle{font-size:13px;color:var(--muted)}
+  .social-arrow{margin-top:16px;color:var(--accent);font-size:18px}
+
+  /* ─── CTA SECTION ─── */
+  #cta{
+    padding:120px 5%;text-align:center;
+    background:linear-gradient(180deg,var(--black) 0%,var(--surface) 100%);
+    position:relative;overflow:hidden;
+  }
+  .cta-glow{
+    position:absolute;width:600px;height:400px;
+    background:radial-gradient(ellipse,rgba(0,229,160,0.1) 0%,transparent 70%);
+    top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;
+  }
+  #cta h2{font-size:clamp(36px,5vw,68px);font-weight:800;letter-spacing:-2px;margin-bottom:20px;position:relative}
+  #cta p{font-size:18px;color:var(--muted);max-width:500px;margin:0 auto 40px;position:relative}
+  .cta-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative}
+
+  /* ─── FOOTER ─── */
+  footer{
+    background:var(--black);border-top:1px solid var(--border);
+    padding:60px 5% 32px;
+  }
+  .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px}
+  .footer-brand .logo{display:block;margin-bottom:16px}
+  .footer-brand p{font-size:14px;color:var(--muted);line-height:1.7;max-width:280px}
+  .footer-col h5{font-family:'Syne',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+  .footer-col ul{list-style:none}
+  .footer-col ul li{margin-bottom:10px}
+  .footer-col ul li a{color:var(--muted);font-size:14px;text-decoration:none;transition:color .2s}
+  .footer-col ul li a:hover{color:var(--accent)}
+  .footer-bottom{
+    border-top:1px solid var(--border);padding-top:24px;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  }
+  .footer-bottom p{font-size:13px;color:var(--muted)}
+
+  /* ─── ANIMATIONS ─── */
+  .fade-in{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+
+  /* ─── MODAL ─── */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;z-index:1000;
+    background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:20px;
+  }
+  .modal-overlay.open{display:flex}
+  .modal{
+    background:var(--surface);border:1px solid var(--border2);
+    border-radius:var(--radius-lg);padding:40px;max-width:500px;width:100%;
+    position:relative;animation:slideUp .3s ease;
+  }
+  @keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+  .modal-close{
+    position:absolute;top:16px;right:16px;
+    background:transparent;border:1px solid var(--border);
+    color:var(--muted);width:32px;height:32px;border-radius:8px;
+    cursor:pointer;font-size:16px;
+  }
+  .modal h3{font-size:24px;font-weight:800;margin-bottom:8px}
+  .modal p{color:var(--muted);margin-bottom:24px;font-size:15px}
+  .success-banner{
+    display:none;
+    background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.3);
+    border-radius:10px;padding:16px;text-align:center;color:var(--accent);
+    font-weight:600;margin-top:16px;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:900px){
+    .custom-grid{grid-template-columns:1fr}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .savings-callout{grid-template-columns:1fr}
+    .crm-flow::before{display:none}
+  }
+  @media(max-width:640px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .footer-grid{grid-template-columns:1fr}
+    .hero-stats{gap:24px}
+    .savings-nums{gap:24px}
+    nav{padding:14px 5%}
+  }
+  .mob-menu{
+    display:none;position:fixed;top:70px;left:0;right:0;z-index:99;
+    background:var(--surface);border-bottom:1px solid var(--border);
+    padding:20px 5%;
+  }
+  .mob-menu.open{display:block}
+  .mob-menu a{display:block;padding:12px 0;color:var(--muted);text-decoration:none;
+    border-bottom:1px solid var(--border);font-size:15px}
+  .mob-menu a:last-child{border-bottom:none;margin-top:16px;color:var(--accent);font-weight:700}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <div class="logo">Nex<span>Flow</span></div>
+  <ul class="nav-links">
+    <li><a href="#why">Why Automate</a></li>
+    <li><a href="#automations">Automations</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#custom">Custom Build</a></li>
+    <li><a href="#testimonials">Results</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:0">
+    <button class="lang-btn" onclick="showLangModal()">🌐 EN</button>
+    <a href="#packages" class="nav-cta">Get Started →</a>
+    <div class="hamburger" onclick="toggleMob()" style="margin-left:16px">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#why" onclick="toggleMob()">Why Automate</a>
+  <a href="#automations" onclick="toggleMob()">Automations</a>
+  <a href="#packages" onclick="toggleMob()">Packages</a>
+  <a href="#custom" onclick="toggleMob()">Custom Build</a>
+  <a href="#testimonials" onclick="toggleMob()">Results</a>
+  <a href="#packages" onclick="toggleMob()">Get Started →</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      AI Automation — Built for Businesses That Mean Business
+    </div>
+    <h1 class="hero-title">
+      Stop Doing What<br>
+      <span class="highlight">Machines Do Better</span>
+    </h1>
+    <p class="hero-sub">Deploy powerful AI automations that handle your marketing, sales, operations, and customer service — while you focus on growing your vision.</p>
+    <div class="hero-actions">
+      <a href="#automations" class="btn-primary">Browse Automations →</a>
+      <a href="#custom" class="btn-secondary">Build Custom Automation</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">340+</div>
+        <div class="stat-label">Ready-to-deploy automations</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">Cost to hire extra staff</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">76h</div>
+        <div class="stat-label">Average deployment time</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Client satisfaction rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY AUTOMATE (CONVERSION) ─── -->
+<section id="why">
+  <div class="section-header fade-in">
+    <div class="section-label">The Business Case</div>
+    <h2 class="section-title">Your competitors are already automating.<br>Are you?</h2>
+    <p class="section-sub">Every hour your team spends on repetitive tasks is an hour not spent on strategy, growth, and revenue. IT COULD BE SPENT ON OTHER THINGS Here's what automation actually changes.</p>
+  </div>
+  <div class="why-grid fade-in">
+    <div class="why-card">
+      <div class="why-icon">💸</div>
+      <h3>Slash Operational Costs</h3>
+      <p>Replace repetitive manual work with AI that runs 24/7. Our clients reduce operational overhead by an average of 60% within the first three months — without cutting a single person.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h3>Execute 10× Faster</h3>
+      <p>What takes your team a full day takes our automations under a minute. From lead follow-ups to report generation to customer onboarding — speed is your new competitive edge.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📈</div>
+      <h3>Scale Without Headcount</h3>
+      <p>Handling 100 customers costs the same as handling 10,000 when your operations are automated. Grow your revenue without proportionally growing your payroll.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎯</div>
+      <h3>Never Miss a Lead Again</h3>
+      <p>AI-driven sales and marketing automations respond instantly, qualify leads, and nurture prospects through your funnel automatically — even while you sleep.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔒</div>
+      <h3>Eliminate Human Error</h3>
+      <p>Automated processes don't make typos, forget steps, or have bad days. Deliver consistent, high-quality output to your customers every single time.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h3>Work Across Any Time Zone</h3>
+      <p>Your automations work around the clock. Customers in Lagos, London, and Los Angeles get instant responses — building a global business from day one.</p>
+    </div>
+  </div>
+
+  <div class="savings-callout fade-in">
+    <div>
+      <h3>The real cost of <em>not</em> automating</h3>
+      <p>Every month without automation, you're paying the equivalent of multiple full-time salaries in wasted manual work, missed leads, and slow execution. Our packages pay for themselves — usually in the first 30 days.</p>
+      <a href="#packages" class="btn-primary" style="display:inline-flex;margin-top:24px">See Packages →</a>
+    </div>
+    <div class="savings-nums">
+      <div class="snum">
+        <div class="val">60%</div>
+        <div class="lbl">Average cost saved</div>
+      </div>
+      <div class="snum">
+        <div class="val">3.2×</div>
+        <div class="lbl">Average ROI in 90 days</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AUTOMATION STORE ─── -->
+<section id="automations">
+  <div class="section-header fade-in">
+    <div class="section-label">Automation Library</div>
+    <h2 class="section-title">Find your automation. Deploy today.</h2>
+    <p class="section-sub">Browse hundreds of ready-made automations. Subscribe monthly and get it running in your business — no code required.</p>
+  </div>
+
+  <div class="search-bar fade-in">
+    <span style="font-size:18px;color:var(--muted)">🔍</span>
+    <input type="text" id="autoSearch" placeholder="Search automations — e.g. 'invoice', 'lead follow-up', 'social media'..." oninput="filterAutos()">
+    <button class="search-btn" onclick="filterAutos()">Search</button>
+  </div>
+
+  <div class="filter-tabs fade-in" id="filterTabs">
+    <button class="filter-tab active" onclick="setFilter('all',this)">All</button>
+    <button class="filter-tab" onclick="setFilter('marketing',this)">Marketing</button>
+    <button class="filter-tab" onclick="setFilter('sales',this)">Sales</button>
+    <button class="filter-tab" onclick="setFilter('operations',this)">Operations</button>
+    <button class="filter-tab" onclick="setFilter('customer',this)">Customer Service</button>
+    <button class="filter-tab" onclick="setFilter('finance',this)">Finance</button>
+    <button class="filter-tab" onclick="setFilter('hr',this)">HR & Hiring</button>
+    <button class="filter-tab" onclick="setFilter('ecommerce',this)">E-Commerce</button>
+  </div>
+
+  <div class="automation-grid" id="autoGrid"></div>
+  <div style="text-align:center;margin-top:48px">
+    <a href="#custom" class="btn-secondary">Don't see what you need? Request a custom build →</a>
+  </div>
+</section>
+
+<!-- ─── PACKAGES ─── -->
+<section id="packages">
+  <div class="section-header centered fade-in">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Pick your growth plan</h2>
+    <p class="section-sub">Whether you're a solopreneur or a scaling enterprise, there's a package that fits. All plans include onboarding support and ongoing updates.</p>
+  </div>
+
+  <div class="pkg-toggle fade-in">
+    <button class="pkg-toggle-btn active" onclick="setAudience('individual',this)">Individual</button>
+    <button class="pkg-toggle-btn" onclick="setAudience('business',this)">Business</button>
+    <button class="pkg-toggle-btn" onclick="setAudience('enterprise',this)">Enterprise</button>
+  </div>
+
+  <div class="packages-grid" id="packagesGrid"></div>
+
+  <div class="industry-section fade-in" id="industrySection">
+    <div class="section-header">
+      <div class="section-label">By Industry</div>
+      <h2 class="section-title" style="font-size:32px">Industry-specific packages</h2>
+      <p class="section-sub">Every industry has unique workflows. We've pre-built complete automation stacks for yours.</p>
+    </div>
+    <div class="industry-tabs" id="industryTabs">
+      <button class="filter-tab active" onclick="setIndustry('retail',this)">Retail & E-com</button>
+      <button class="filter-tab" onclick="setIndustry('real_estate',this)">Real Estate</button>
+      <button class="filter-tab" onclick="setIndustry('healthcare',this)">Healthcare</button>
+      <button class="filter-tab" onclick="setIndustry('agency',this)">Agencies</button>
+      <button class="filter-tab" onclick="setIndustry('restaurant',this)">Restaurants</button>
+      <button class="filter-tab" onclick="setIndustry('finance',this)">Finance</button>
+    </div>
+    <div id="industryContent" style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px"></div>
+  </div>
+</section>
+
+<!-- ─── CUSTOM AUTOMATION ─── -->
+<section id="custom">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start" class="custom-grid fade-in">
+    <div>
+      <div class="section-label">Custom Builds</div>
+      <h2 class="section-title">Need something unique? We build it.</h2>
+      <p style="color:var(--muted);font-size:16px;line-height:1.75;margin-bottom:32px">Tell us what you need automated and we'll match you with a specialist developer who'll design, build, and deliver a custom automation — tailored exactly to your business.</p>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px">
+        <div style="font-size:15px;font-weight:600;margin-bottom:16px">How it works</div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;align-items:flex-start;gap:16px">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(0,229,160,0.1);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">1</div>
+            <div><div style="font-weight:600;margin-bottom:4px">Submit your brief</div><div style="font-size:14px;color:var(--muted)">Describe what you want automated. The more detail, the better.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:16px">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(0,229,160,0.1);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">2</div>
+            <div><div style="font-weight:600;margin-bottom:4px">Get matched with a developer</div><div style="font-size:14px;color:var(--muted)">We pair you with a verified specialist. You'll have a discovery call within 48 hours.</div></div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:16px">
+            <div style="width:32px;height:32px;border-radius:50%;background:rgba(0,229,160,0.1);border:1px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">3</div>
+            <div><div style="font-weight:600;margin-bottom:4px">Receive & approve your automation</div><div style="font-size:14px;color:var(--muted)">Review the build, request revisions, and go live with full handover support.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dev-cards">
+        <div class="dev-card">
+          <div class="dev-avatar">AO</div>
+          <div>
+            <div class="dev-name">Adaeze Okonkwo</div>
+            <div class="dev-spec">Marketing & CRM Automations</div>
+            <div class="dev-stars">★★★★★ 47 projects completed</div>
+          </div>
+        </div>
+        <div class="dev-card">
+          <div class="dev-avatar" style="background:linear-gradient(135deg,#ff6b35,#fbbf24)">EM</div>
+          <div>
+            <div class="dev-name">Emmanuel Musa</div>
+            <div class="dev-spec">E-Commerce & Inventory Flows</div>
+            <div class="dev-stars">★★★★★ 63 projects completed</div>
+          </div>
+        </div>
+        <div class="dev-card">
+          <div class="dev-avatar" style="background:linear-gradient(135deg,#7c5cfc,#a78bfa)">ZA</div>
+          <div>
+            <div class="dev-name">Zainab Abdullahi</div>
+            <div class="dev-spec">AI Chatbots & Lead Funnels</div>
+            <div class="dev-stars">★★★★★ 91 projects completed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-form">
+      <h3 style="font-size:22px;font-weight:800;margin-bottom:8px">Request a Custom Build</h3>
+      <p style="color:var(--muted);font-size:14px;margin-bottom:28px">We respond to every request within 24 hours.</p>
+      <div class="form-group">
+        <label>YOUR NAME</label>
+        <input type="text" id="cName" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label>EMAIL ADDRESS</label>
+        <input type="email" id="cEmail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>BUSINESS / COMPANY NAME</label>
+        <input type="text" id="cBiz" placeholder="Optional">
+      </div>
+      <div class="form-group">
+        <label>WHAT DO YOU WANT AUTOMATED?</label>
+        <textarea id="cBrief" placeholder="Describe the task, process, or workflow you want to automate. Include as much detail as possible — tools you use, volume, desired outcome..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>YOUR INDUSTRY</label>
+        <select id="cIndustry">
+          <option value="">Select industry...</option>
+          <option>Retail / E-Commerce</option>
+          <option>Real Estate</option>
+          <option>Healthcare</option>
+          <option>Marketing Agency</option>
+          <option>Restaurant / Food</option>
+          <option>Finance / Insurance</option>
+          <option>Education</option>
+          <option>Logistics / Supply Chain</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ESTIMATED BUDGET (MONTHLY)</label>
+        <select id="cBudget">
+          <option>Under $200/mo</option>
+          <option>$200 – $500/mo</option>
+          <option>$500 – $1,000/mo</option>
+          <option>$1,000 – $3,000/mo</option>
+          <option>$3,000+/mo</option>
+          <option>One-time project</option>
+        </select>
+      </div>
+      <button class="custom-submit" onclick="submitCustom()">Request My Custom Automation →</button>
+      <div class="success-banner" id="customSuccess">✓ Request received! We'll be in touch within 24 hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section id="testimonials">
+  <div class="section-header centered fade-in">
+    <div class="section-label">Real Results</div>
+    <h2 class="section-title">Businesses transformed by automation</h2>
+    <p class="section-sub">From solo consultants to growing companies, here's what our clients have achieved.</p>
+  </div>
+  <div class="testi-grid fade-in" id="testiGrid"></div>
+</section>
+
+<!-- ─── CRM / AFTER PURCHASE ─── -->
+<section id="crm">
+  <div class="section-header centered fade-in">
+    <div class="section-label">The NexFlow Experience</div>
+    <h2 class="section-title">We're with you every step of the way</h2>
+    <p class="section-sub">After you purchase, you're not left alone. Our CRM-backed follow-up system ensures your automation is actually delivering results.</p>
+  </div>
+  <div class="crm-flow fade-in">
+    <div class="crm-step">
+      <div class="crm-num">01</div>
+      <h4>Order Confirmed</h4>
+      <p>Instant confirmation email with your onboarding checklist and next steps.</p>
+    </div>
+    <div class="crm-step">
+      <div class="crm-num">02</div>
+      <h4>Setup & Integration</h4>
+      <p>Our team configures your automation and integrates it with your existing tools.</p>
+    </div>
+    <div class="crm-step">
+      <div class="crm-num">03</div>
+      <h4>Go Live</h4>
+      <p>Your automation goes live. We run tests, verify outputs, and hand over full control.</p>
+    </div>
+    <div class="crm-step">
+      <div class="crm-num">04</div>
+      <h4>Ongoing Check-Ins</h4>
+      <p>Regular feedback loops, performance reports, and suggestions for what else we can automate.</p>
+    </div>
+    <div class="crm-step">
+      <div class="crm-num">05</div>
+      <h4>You Scale</h4>
+      <p>With operations running automatically, you focus on strategy, growth, and your vision.</p>
+    </div>
+  </div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:40px;margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center" class="fade-in">
+    <div>
+      <h3 style="font-size:24px;font-weight:800;margin-bottom:12px">Your voice shapes our product</h3>
+      <p style="color:var(--muted);line-height:1.75;font-size:15px">After every interaction, our CRM captures your feedback — what's working, what isn't, and what you wish we'd automate next. This data directly feeds our development roadmap. Every client request has a chance to become a product available to the whole community.</p>
+    </div>
+    <div style="display:grid;gap:12px">
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;gap:12px;align-items:center">
+        <span style="font-size:20px">📬</span>
+        <div><div style="font-weight:600;font-size:14px">Automated check-in emails</div><div style="font-size:13px;color:var(--muted)">Day 7, 30, and 90 post-purchase</div></div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;gap:12px;align-items:center">
+        <span style="font-size:20px">📊</span>
+        <div><div style="font-weight:600;font-size:14px">Monthly performance reports</div><div style="font-size:13px;color:var(--muted)">See exactly what your automation is saving you</div></div>
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;gap:12px;align-items:center">
+        <span style="font-size:20px">💬</span>
+        <div><div style="font-weight:600;font-size:14px">Direct feedback channel</div><div style="font-size:13px;color:var(--muted)">Request features, report issues, suggest improvements</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SOCIALS ─── -->
+<section id="socials">
+  <div class="section-header centered fade-in">
+    <div class="section-label">Stay Connected</div>
+    <h2 class="section-title">Join our community</h2>
+    <p class="section-sub">Follow us for daily automation tips, case studies, behind-the-scenes builds, and exclusive deals for our community members.</p>
+  </div>
+  <div class="socials-grid fade-in">
+    <a href="#" class="social-card">
+      <div class="social-icon">💼</div>
+      <div class="social-name">LinkedIn</div>
+      <div class="social-handle">@NexFlowAI</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px">B2B insights, case studies, and enterprise automation news</div>
+      <div class="social-arrow">↗</div>
+    </a>
+    <a href="#" class="social-card">
+      <div class="social-icon">📸</div>
+      <div class="social-name">Instagram</div>
+      <div class="social-handle">@nexflow.ai</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px">Visual results, client wins, and before/after transformation stories</div>
+      <div class="social-arrow">↗</div>
+    </a>
+    <a href="#" class="social-card">
+      <div class="social-icon">🐦</div>
+      <div class="social-name">X / Twitter</div>
+      <div class="social-handle">@NexFlowAI</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px">Quick automation tips, real-time updates, and industry commentary</div>
+      <div class="social-arrow">↗</div>
+    </a>
+    <a href="#" class="social-card">
+      <div class="social-icon">▶️</div>
+      <div class="social-name">YouTube</div>
+      <div class="social-handle">NexFlow AI</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px">Full automation walkthroughs, tutorials, and founder deep-dives</div>
+      <div class="social-arrow">↗</div>
+    </a>
+    <a href="#" class="social-card">
+      <div class="social-icon">💬</div>
+      <div class="social-name">WhatsApp Community</div>
+      <div class="social-handle">NexFlow Members</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px">Direct access to our team and fellow automation-powered business owners</div>
+      <div class="social-arrow">↗</div>
+    </a>
+    <a href="#" class="social-card">
+      <div class="social-icon">🎵</div>
+      <div class="social-name">TikTok</div>
+      <div class="social-handle">@nexflowai</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:8px">60-second automation demos that will change how you run your business</div>
+      <div class="social-arrow">↗</div>
+    </a>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section id="cta">
+  <div class="cta-glow"></div>
+  <div class="section-label" style="position:relative">Start Today</div>
+  <h2 style="position:relative">Your competitors aren't waiting.<br><span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Why are you?</span></h2>
+  <p style="position:relative">Pick a package, find an automation, or request a custom build. Our team is ready to get you live within 72 hours.</p>
+  <div class="cta-actions">
+    <a href="#automations" class="btn-primary">Browse All Automations →</a>
+    <a href="#packages" class="btn-secondary">View Packages</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" style="font-size:24px">Nex<span style="color:var(--text)">Flow</span></div>
+      <p style="margin-top:12px">AI automation for businesses that refuse to be held back by manual processes. Scale smarter. Grow faster.</p>
+      <div style="margin-top:20px;display:flex;gap:12px">
+        <a href="#" style="color:var(--muted);font-size:20px;text-decoration:none">💼</a>
+        <a href="#" style="color:var(--muted);font-size:20px;text-decoration:none">📸</a>
+        <a href="#" style="color:var(--muted);font-size:20px;text-decoration:none">🐦</a>
+        <a href="#" style="color:var(--muted);font-size:20px;text-decoration:none">▶️</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Product</h5>
+      <ul>
+        <li><a href="#automations">Automation Library</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#custom">Custom Builds</a></li>
+        <li><a href="#crm">How It Works</a></li>
+        <li><a href="#">Pricing FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Developers</a></li>
+        <li><a href="#">Case Studies</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Support</h5>
+      <ul>
+        <li><a href="#">Help Center</a></li>
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">Status Page</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 NexFlow AI. All rights reserved. Built to scale your business.</p>
+    <p style="color:var(--accent)">Automating Africa and the world. 🌍</p>
+  </div>
+</footer>
+
+<!-- ─── PURCHASE MODAL ─── -->
+<div class="modal-overlay" id="purchaseModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modalTitle">Subscribe to Automation</h3>
+    <p id="modalDesc">You're about to subscribe to this automation on a monthly recurring basis. You'll receive access and setup support within 48 hours.</p>
+    <div id="modalPrice" style="font-family:'Syne',sans-serif;font-size:36px;font-weight:800;color:var(--accent);margin-bottom:24px"></div>
+    <div class="form-group"><label>YOUR NAME</label><input type="text" id="mName" placeholder="Full name"></div>
+    <div class="form-group"><label>EMAIL</label><input type="email" id="mEmail" placeholder="your@email.com"></div>
+    <div class="form-group"><label>BUSINESS (OPTIONAL)</label><input type="text" id="mBiz" placeholder="Company name"></div>
+    <button class="custom-submit" onclick="completePurchase()">Complete Subscription →</button>
+    <div class="success-banner" id="purchaseSuccess">🎉 Subscribed! Check your email for next steps. Welcome to NexFlow.</div>
+  </div>
+</div>
+
+<!-- ─── LANGUAGE MODAL ─── -->
+<div class="modal-overlay" id="langModal">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('langModal').classList.remove('open')">✕</button>
+    <h3>Choose Language</h3>
+    <p>All content on this site is available in your preferred language via auto-translation.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px">
+      <button onclick="setLang('en')" style="padding:12px;background:var(--surface2);border:1px solid var(--accent);border-radius:8px;color:var(--accent);font-weight:700;cursor:pointer">🇬🇧 English</button>
+      <button onclick="setLang('fr')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇫🇷 Français</button>
+      <button onclick="setLang('es')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇪🇸 Español</button>
+      <button onclick="setLang('ar')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇸🇦 العربية</button>
+      <button onclick="setLang('pt')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇧🇷 Português</button>
+      <button onclick="setLang('yo')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇳🇬 Yorùbá</button>
+      <button onclick="setLang('ha')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇳🇬 Hausa</button>
+      <button onclick="setLang('ig')" style="padding:12px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--muted);cursor:pointer">🇳🇬 Igbo</button>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-top:16px;text-align:center">Translation powered by Google Translate. Some content may vary.</p>
+  </div>
+</div>
+
+<script>
+// ─── DATA ───
+const AUTOMATIONS = [
+  {id:1,icon:'📧',title:'Email Sequence Automator',desc:'Sends timed, personalized email sequences to leads and customers based on their behavior and stage in your funnel.',price:49,period:'/mo',category:'marketing',badge:'badge-popular',badgeText:'Popular'},
+  {id:2,icon:'📱',title:'Social Media Auto-Poster',desc:'Schedules and publishes content across LinkedIn, Instagram, X, and Facebook from a single content calendar.',price:39,period:'/mo',category:'marketing',badge:'badge-mrr',badgeText:'MRR'},
+  {id:3,icon:'🎯',title:'Lead Scoring & Routing',desc:'Automatically scores incoming leads based on behavior and demographics, then routes them to the right salesperson.',price:79,period:'/mo',category:'sales',badge:'badge-popular',badgeText:'Popular'},
+  {id:4,icon:'💬',title:'AI Customer Support Bot',desc:'24/7 intelligent chatbot that handles FAQs, order status, returns, and escalates complex issues to your team.',price:89,period:'/mo',category:'customer',badge:'badge-mrr',badgeText:'MRR'},
+  {id:5,icon:'🧾',title:'Automated Invoice Generator',desc:'Creates, sends, and tracks invoices automatically based on project milestones, subscriptions, or trigger events.',price:29,period:'/mo',category:'finance',badge:'badge-new',badgeText:'New'},
+  {id:6,icon:'📦',title:'Inventory Alert System',desc:'Monitors your stock levels and automatically reorders or alerts procurement when thresholds are breached.',price:59,period:'/mo',category:'ecommerce',badge:'badge-mrr',badgeText:'MRR'},
+  {id:7,icon:'🤝',title:'CRM Data Enrichment',desc:'Automatically pulls public data to enrich contact profiles in your CRM — company size, industry, social profiles.',price:45,period:'/mo',category:'sales',badge:'badge-new',badgeText:'New'},
+  {id:8,icon:'📊',title:'Weekly Business Report Bot',desc:'Aggregates data from all your tools and delivers a clean executive summary to your inbox every Monday morning.',price:35,period:'/mo',category:'operations',badge:'badge-mrr',badgeText:'MRR'},
+  {id:9,icon:'🔔',title:'Abandoned Cart Recovery',desc:'Detects cart abandonment and triggers a multi-step recovery sequence via email and SMS with dynamic offers.',price:65,period:'/mo',category:'ecommerce',badge:'badge-popular',badgeText:'Popular'},
+  {id:10,icon:'📋',title:'Job Application Screener',desc:'Automatically filters resumes, scores candidates against your criteria, and schedules interviews with top matches.',price:69,period:'/mo',category:'hr',badge:'badge-new',badgeText:'New'},
+  {id:11,icon:'🌟',title:'Review Request Automation',desc:'After a purchase or service, automatically requests reviews on Google, Trustpilot, or your platform of choice.',price:29,period:'/mo',category:'customer',badge:'badge-mrr',badgeText:'MRR'},
+  {id:12,icon:'📈',title:'Ad Performance Monitor',desc:'Tracks ad spend and performance across Google and Meta, and sends daily alerts if ROAS drops below your threshold.',price:55,period:'/mo',category:'marketing',badge:'badge-popular',badgeText:'Popular'},
+];
+
+const PACKAGES = {
+  individual:[
+    {name:'Starter',price:'49',period:'per month',tagline:'Automate your first workflow. See the difference in week one.',features:['1 active automation','Monthly performance report','Email support','Setup included','Cancel anytime'],featured:false,popular:false},
+    {name:'Growth',price:'129',period:'per month',tagline:'Stack automations to run your personal brand or solo business on autopilot.',features:['5 active automations','Bi-weekly check-ins','Priority email support','Free setup + integration','Access to full library','Cancel anytime'],featured:true,popular:true},
+    {name:'Pro',price:'249',period:'per month',tagline:'Full-stack personal automation — for high-performers who refuse to waste time.',features:['Unlimited automations','Weekly optimization calls','Dedicated account manager','Custom workflow design','API integrations included','White-glove onboarding'],featured:false,popular:false},
+  ],
+  business:[
+    {name:'Team',price:'299',period:'per month',tagline:'Automate your whole team\'s workflow — sales, ops, marketing, support.',features:['Up to 15 automations','Full team access','Monthly strategy session','CRM integration','Custom reporting dashboard','Slack / Teams integration'],featured:false,popular:false},
+    {name:'Scale',price:'699',period:'per month',tagline:'Built for businesses that are serious about removing every bottleneck.',features:['Up to 50 automations','Dedicated automation specialist','Bi-weekly strategy sessions','Custom AI model fine-tuning','Full API access','Multi-location support','SLA guarantee'],featured:true,popular:true},
+    {name:'Enterprise',price:'Custom',period:'bespoke pricing',tagline:'For large operations with complex, multi-department automation needs.',features:['Unlimited automations','Dedicated team of developers','Custom integrations & APIs','On-site / remote training','99.9% uptime SLA','24/7 support hotline','White-label option available'],featured:false,popular:false},
+  ],
+  enterprise:[
+    {name:'Enterprise Core',price:'1,499',period:'per month',tagline:'Enterprise-grade automation infrastructure with dedicated support.',features:['Unlimited automations','Dedicated engineering team','Custom data pipelines','SSO & advanced security','SOC 2 compliant infrastructure','Monthly executive reports','Custom SLA'],featured:false,popular:false},
+    {name:'Enterprise Plus',price:'Custom',period:'fully bespoke',tagline:'Full technology partnership — we become your in-house automation arm.',features:['Unlimited everything','Embedded automation team','Quarterly roadmap planning','Custom AI model development','Regulatory compliance support','Board-level reporting','Partnership agreement'],featured:true,popular:true},
+  ],
+};
+
+const INDUSTRY_DATA = {
+  retail:{title:'Retail & E-Commerce',desc:'Automate your entire customer journey — from discovery to delivery to retention.',items:['Abandoned cart recovery sequences','Inventory reorder triggers','Product review collection','Personalized upsell flows','Seasonal campaign automation','Supplier communication bots']},
+  real_estate:{title:'Real Estate',desc:'Never lose a property lead. Automate follow-ups, viewings, and documentation.',items:['Lead qualification chatbots','Viewing scheduler automation','Document collection & processing','CRM data enrichment','Market report distribution','Landlord/tenant communication flows']},
+  healthcare:{title:'Healthcare',desc:'Reduce administrative burden so your team focuses on patients, not paperwork.',items:['Appointment reminders & rescheduling','Insurance pre-authorization flows','Patient intake form processing','Follow-up care messaging','Lab result notifications','Billing & claims automation']},
+  agency:{title:'Marketing Agencies',desc:'Deliver more client value while reducing account management overhead.',items:['Client report automation','Social media scheduling','Ad performance monitoring','Lead generation pipelines','Proposal & onboarding flows','Invoicing & payment tracking']},
+  restaurant:{title:'Restaurants & Food',desc:'From reservations to reviews, automate the full dining experience.',items:['Reservation confirmation & reminders','Review request automation','Supplier order management','Staff scheduling notifications','Loyalty program management','Food delivery platform sync']},
+  finance:{title:'Finance & Insurance',desc:'Automate compliance, client communication, and reporting at scale.',items:['KYC document collection','Compliance monitoring alerts','Client onboarding flows','Portfolio performance reports','Renewal reminder sequences','Claims processing automation']},
+};
+
+const TESTIMONIALS = [
+  {stars:'★★★★★',stat:'Saved 40 hours/month',quote:'Before NexFlow, my team was manually sending follow-up emails to every single lead. Now it\'s all automated. Our response time went from 48 hours to under 5 minutes — and our conversion rate doubled.',name:'Chidinma Eze',role:'Founder, StyleHive Lagos',initials:'CE',color:'#00e5a0'},
+  {stars:'★★★★★',stat:'Revenue up 180% in 90 days',quote:'The abandoned cart automation alone paid for the entire package in the first week. I couldn\'t believe how much money I was leaving on the table before this.',name:'Marcus Obi',role:'CEO, FreshDrop E-Commerce',initials:'MO',color:'#7c5cfc'},
+  {stars:'★★★★★',stat:'Replaced 3 manual roles',quote:'We\'re a small real estate agency. With NexFlow, our lead qualification bot handles hundreds of inquiries daily. We only speak to people who are actually ready to buy. Incredible.',name:'Fatima Al-Rashid',role:'Managing Director, PrimeProp Realty',initials:'FA',color:'#ff6b35'},
+  {stars:'★★★★★',stat:'Cut admin work by 70%',quote:'The custom build team understood our healthcare workflows better than any consultant we\'ve hired. The automation they built for patient follow-ups has genuinely changed how we operate.',name:'Dr. Emeka Nwosu',role:'Medical Director, WellCare Clinics',initials:'EN',color:'#00e5a0'},
+  {stars:'★★★★★',stat:'5× more leads processed',quote:'As a marketing agency, we now process 5× the client volume with the same team. The reporting automation alone saves us two full days of work every month.',name:'Aisha Bello',role:'Agency Director, Clicks & Conversions',initials:'AB',color:'#7c5cfc'},
+  {stars:'★★★★★',stat:'$12,000 saved in 6 months',quote:'I was skeptical at first. But the ROI calculation they did for me before I even signed up was accurate to the dollar. Best business investment I\'ve made this year.',name:'David Mensah',role:'CFO, TradeFlow Ghana',initials:'DM',color:'#ff6b35'},
+];
+
+// ─────────────────────────────────────────────────────────────
+// MAKE.COM WEBHOOK CONFIGURATION
+// Paste your Make.com webhook URLs below.
+// Leave a field as '' to disable that webhook (form still works normally).
+// ─────────────────────────────────────────────────────────────
+const WEBHOOKS = {
+  // Fired when someone subscribes to an automation or package via the modal
+  purchase: 'https://hook.eu2.make.com/moxussem1s3sw3job5m3veb5b6svrmgq',
+
+  // Fired when someone submits the Custom Build request form
+  consultation: 'https://hook.eu2.make.com/wk98kys8q1n87mq7j1b4qn3x84tacowm',
+};
+// ─────────────────────────────────────────────────────────────
+
+// ─── WEBHOOK HELPER ───
+async function sendToMake(webhookUrl, payload) {
+  if (!webhookUrl) return; // webhook not configured — skip silently
+  try {
+    await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  } catch (err) {
+    console.warn('[NexFlow] Webhook delivery failed:', err);
+  }
+}
+
+// ─── RENDER ───
+let currentFilter = 'all';
+let currentAudience = 'individual';
+let currentIndustry = 'retail';
+let currentAutoId = null;
+
+function renderAutos(){
+  const search = document.getElementById('autoSearch').value.toLowerCase();
+  const grid = document.getElementById('autoGrid');
+  const filtered = AUTOMATIONS.filter(a=>{
+    const matchCat = currentFilter==='all'||a.category===currentFilter;
+    const matchSearch = !search||a.title.toLowerCase().includes(search)||a.desc.toLowerCase().includes(search);
+    return matchCat&&matchSearch;
+  });
+  grid.innerHTML = filtered.length ? filtered.map(a=>`
+    <div class="automation-card">
+      <div class="auto-top">
+        <div class="auto-icon">${a.icon}</div>
+        <span class="auto-badge ${a.badge}">${a.badgeText}</span>
+      </div>
+      <div class="auto-title">${a.title}</div>
+      <div class="auto-desc">${a.desc}</div>
+      <div class="auto-footer">
+        <div class="auto-price">$${a.price}<span>${a.period}</span></div>
+        <button class="auto-buy" onclick="openModal(${a.id})">Subscribe</button>
+      </div>
+    </div>
+  `).join('') : '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:40px">No automations match your search. <a href="#custom" style="color:var(--accent)">Request a custom build →</a></p>';
+}
+
+function filterAutos(){renderAutos()}
+function setFilter(cat,el){
+  currentFilter=cat;
+  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderAutos();
+}
+
+function renderPackages(){
+  const pkgs = PACKAGES[currentAudience];
+  document.getElementById('packagesGrid').innerHTML = pkgs.map(p=>`
+    <div class="pkg-card ${p.featured?'featured':''}">
+      ${p.popular?'<div class="pkg-popular">Most Popular</div>':''}
+      <div class="pkg-name">${p.name}</div>
+      <div class="pkg-price">${p.price==='Custom'?'Custom':('<span class="currency">$</span>'+p.price)}</div>
+      <div class="pkg-period">${p.period}</div>
+      <div class="pkg-tagline">${p.tagline}</div>
+      <ul class="pkg-features">
+        ${p.features.map(f=>`<li><span class="check">✓</span><span>${f}</span></li>`).join('')}
+      </ul>
+      <button class="pkg-btn ${p.featured?'primary':''}" onclick="${p.price==='Custom'?'document.getElementById(\'custom\').scrollIntoView()':'openPkgModal(\''+p.name+'\',\''+p.price+'\')'}">
+        ${p.price==='Custom'?'Contact Us →':'Get '+p.name+' →'}
+      </button>
+    </div>
+  `).join('');
+}
+
+function setAudience(aud,el){
+  currentAudience=aud;
+  document.querySelectorAll('.pkg-toggle-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderPackages();
+}
+
+function renderIndustry(){
+  const d = INDUSTRY_DATA[currentIndustry];
+  document.getElementById('industryContent').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
+      <div>
+        <h3 style="font-size:24px;font-weight:800;margin-bottom:12px">${d.title} Automation Stack</h3>
+        <p style="color:var(--muted);font-size:15px;line-height:1.7;margin-bottom:24px">${d.desc}</p>
+        <a href="#packages" class="btn-primary" style="display:inline-flex;font-size:14px;padding:12px 24px">Get This Package →</a>
+      </div>
+      <div style="display:grid;gap:10px">
+        ${d.items.map(i=>`<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)"><span style="color:var(--accent)">✓</span><span style="font-size:14px">${i}</span></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function setIndustry(ind,el){
+  currentIndustry=ind;
+  document.querySelectorAll('#industryTabs .filter-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  renderIndustry();
+}
+
+function renderTestimonials(){
+  document.getElementById('testiGrid').innerHTML = TESTIMONIALS.map(t=>`
+    <div class="testi-card">
+      <div class="testi-stat">${t.stat}</div>
+      <div class="testi-stars">${t.stars}</div>
+      <div class="testi-quote">"${t.quote}"</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:${t.color}22;color:${t.color}">${t.initials}</div>
+        <div><div class="testi-name">${t.name}</div><div class="testi-role">${t.role}</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── MODALS ───
+function openModal(id){
+  const a = AUTOMATIONS.find(x=>x.id===id);
+  currentAutoId=id;
+  document.getElementById('modalTitle').textContent = 'Subscribe: '+a.title;
+  document.getElementById('modalDesc').textContent = 'Monthly subscription. Setup included. Cancel anytime.';
+  document.getElementById('modalPrice').textContent = '$'+a.price+'/mo';
+  document.getElementById('purchaseSuccess').style.display='none';
+  document.getElementById('purchaseModal').classList.add('open');
+}
+
+function openPkgModal(name,price){
+  document.getElementById('modalTitle').textContent = name+' Package';
+  document.getElementById('modalDesc').textContent = 'Monthly subscription. Onboarding included. Cancel anytime.';
+  document.getElementById('modalPrice').textContent = '$'+price+'/mo';
+  document.getElementById('purchaseSuccess').style.display='none';
+  document.getElementById('purchaseModal').classList.add('open');
+}
+
+function closeModal(){
+  document.getElementById('purchaseModal').classList.remove('open');
+}
+
+function completePurchase(){
+  const name=document.getElementById('mName').value;
+  const email=document.getElementById('mEmail').value;
+  const biz=document.getElementById('mBiz').value;
+  if(!name||!email){alert('Please fill in your name and email.');return;}
+
+  // ── Send to Make.com ──
+  const auto = currentAutoId ? AUTOMATIONS.find(x=>x.id===currentAutoId) : null;
+  sendToMake(WEBHOOKS.purchase, {
+    event: 'purchase',
+    timestamp: new Date().toISOString(),
+    name,
+    email,
+    business: biz || null,
+    product: document.getElementById('modalTitle').textContent,
+    price: document.getElementById('modalPrice').textContent,
+    automation_id: currentAutoId || null,
+    automation_title: auto ? auto.title : null,
+    automation_category: auto ? auto.category : null,
+    source_url: window.location.href,
+  });
+
+  document.getElementById('purchaseSuccess').style.display='block';
+  setTimeout(()=>closeModal(),3000);
+}
+
+function submitCustom(){
+  const name = document.getElementById('cName').value;
+  const email = document.getElementById('cEmail').value;
+  const biz = document.getElementById('cBiz').value;
+  const brief = document.getElementById('cBrief').value;
+  const industry = document.getElementById('cIndustry').value;
+  const budget = document.getElementById('cBudget').value;
+
+  // ── Send to Make.com ──
+  sendToMake(WEBHOOKS.consultation, {
+    event: 'consultation_request',
+    timestamp: new Date().toISOString(),
+    name: name || null,
+    email: email || null,
+    business: biz || null,
+    brief: brief || null,
+    industry: industry || null,
+    budget: budget || null,
+    source_url: window.location.href,
+  });
+
+  document.getElementById('customSuccess').style.display='block';
+  setTimeout(()=>{document.getElementById('customSuccess').style.display='none'},4000);
+}
+
+function showLangModal(){document.getElementById('langModal').classList.add('open')}
+
+function setLang(lang){
+  document.getElementById('langModal').classList.remove('open');
+  // Google Translate integration point
+  const langs={en:'English',fr:'Français',es:'Español',ar:'العربية',pt:'Português',yo:'Yorùbá',ha:'Hausa',ig:'Igbo'};
+  document.querySelector('.lang-btn').textContent='🌐 '+langs[lang];
+  if(lang!=='en'){
+    const el=document.createElement('div');
+    el.id='google_translate_element';
+    el.style.display='none';
+    document.body.appendChild(el);
+    // Redirect to Google Translate for full translation
+    const url = `https://translate.google.com/translate?sl=en&tl=${lang}&u=${encodeURIComponent(window.location.href)}`;
+    window.open(url,'_blank');
+  }
+}
+
+function toggleMob(){
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+
+// ─── SCROLL ANIMATION ───
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+// ─── INIT ───
+renderAutos();
+renderPackages();
+renderIndustry();
+renderTestimonials();
+
+// Close modals on overlay click
+document.getElementById('purchaseModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.getElementById('langModal').addEventListener('click',function(e){if(e.target===this)this.classList.remove('open')});
+</script>
+</body>
+</html>
