@@ -246,12 +246,22 @@
   .auto-footer{display:flex;justify-content:space-between;align-items:center}
   .auto-price{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--accent)}
   .auto-price span{font-size:12px;color:var(--muted);font-weight:400;font-family:'DM Sans',sans-serif}
+  .auto-pain{font-size:13px;color:var(--accent);font-style:italic;margin-bottom:8px;line-height:1.5;opacity:0.85}
+  .auto-tier-toggle{display:flex;gap:4px;margin-bottom:14px;background:var(--surface3);border-radius:8px;padding:3px}
+  .tier-btn{
+    flex:1;padding:5px 8px;border-radius:6px;font-size:11px;font-weight:700;
+    border:none;background:transparent;color:var(--muted);cursor:pointer;
+    transition:all .2s;font-family:'DM Sans',sans-serif;letter-spacing:0.3px;
+  }
+  .tier-btn.active{background:var(--surface);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,0.3)}
+  .tier-detail{font-size:11px;color:var(--muted);margin-top:3px;min-height:16px}
   .auto-buy{
     background:var(--surface3);color:var(--text);border:1px solid var(--border2);
     padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;
     cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;
   }
   .auto-buy:hover{background:var(--accent);color:var(--black);border-color:var(--accent)}
+
 
   /* ─── PACKAGES ─── */
   #packages{background:var(--surface)}
@@ -612,6 +622,7 @@
     <div>
       <h3>The real cost of <em>not</em> automating</h3>
       <p>Every month without automation, you're paying the equivalent of multiple full-time salaries in wasted manual work, missed leads, and slow execution. Our packages pay for themselves — usually in the first 30 days.</p>
+      <p>A building full of workers trying to compile information would never be as fast as a spreadsheet, and a spreadsheet can never be as fast as a fully automated system hat almsot requires no human help, helping them focus on other tasking operations which demand more</p>
       <a href="#packages" class="btn-primary" style="display:inline-flex;margin-top:24px">See Packages →</a>
     </div>
     <div class="savings-nums">
@@ -918,7 +929,7 @@
   <div class="cta-glow"></div>
   <div class="section-label" style="position:relative">Start Today</div>
   <h2 style="position:relative">Your competitors aren't waiting.<br><span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Why are you?</span></h2>
-  <p style="position:relative">Pick a package, find an automation, or request a custom build. Our team is ready to get you live within 72 hours.</p>
+  <p style="position:relative">Pick a package, find an automation, or request a custom build. Our team is ready to get you live within 76 hours.</p>
   <div class="cta-actions">
     <a href="#automations" class="btn-primary">Browse All Automations →</a>
     <a href="#packages" class="btn-secondary">View Packages</a>
@@ -1013,36 +1024,233 @@
 <script>
 // ─── DATA ───
 const AUTOMATIONS = [
-  {id:1,icon:'📧',title:'Email Sequence Automator',desc:'Sends timed, personalized email sequences to leads and customers based on their behavior and stage in your funnel.',price:49,period:'/mo',category:'marketing',badge:'badge-popular',badgeText:'Popular'},
-  {id:2,icon:'📱',title:'Social Media Auto-Poster',desc:'Schedules and publishes content across LinkedIn, Instagram, X, and Facebook from a single content calendar.',price:39,period:'/mo',category:'marketing',badge:'badge-mrr',badgeText:'MRR'},
-  {id:3,icon:'🎯',title:'Lead Scoring & Routing',desc:'Automatically scores incoming leads based on behavior and demographics, then routes them to the right salesperson.',price:79,period:'/mo',category:'sales',badge:'badge-popular',badgeText:'Popular'},
-  {id:4,icon:'💬',title:'AI Customer Support Bot',desc:'24/7 intelligent chatbot that handles FAQs, order status, returns, and escalates complex issues to your team.',price:89,period:'/mo',category:'customer',badge:'badge-mrr',badgeText:'MRR'},
-  {id:5,icon:'🧾',title:'Automated Invoice Generator',desc:'Creates, sends, and tracks invoices automatically based on project milestones, subscriptions, or trigger events.',price:29,period:'/mo',category:'finance',badge:'badge-new',badgeText:'New'},
-  {id:6,icon:'📦',title:'Inventory Alert System',desc:'Monitors your stock levels and automatically reorders or alerts procurement when thresholds are breached.',price:59,period:'/mo',category:'ecommerce',badge:'badge-mrr',badgeText:'MRR'},
-  {id:7,icon:'🤝',title:'CRM Data Enrichment',desc:'Automatically pulls public data to enrich contact profiles in your CRM — company size, industry, social profiles.',price:45,period:'/mo',category:'sales',badge:'badge-new',badgeText:'New'},
-  {id:8,icon:'📊',title:'Weekly Business Report Bot',desc:'Aggregates data from all your tools and delivers a clean executive summary to your inbox every Monday morning.',price:35,period:'/mo',category:'operations',badge:'badge-mrr',badgeText:'MRR'},
-  {id:9,icon:'🔔',title:'Abandoned Cart Recovery',desc:'Detects cart abandonment and triggers a multi-step recovery sequence via email and SMS with dynamic offers.',price:65,period:'/mo',category:'ecommerce',badge:'badge-popular',badgeText:'Popular'},
-  {id:10,icon:'📋',title:'Job Application Screener',desc:'Automatically filters resumes, scores candidates against your criteria, and schedules interviews with top matches.',price:69,period:'/mo',category:'hr',badge:'badge-new',badgeText:'New'},
-  {id:11,icon:'🌟',title:'Review Request Automation',desc:'After a purchase or service, automatically requests reviews on Google, Trustpilot, or your platform of choice.',price:29,period:'/mo',category:'customer',badge:'badge-mrr',badgeText:'MRR'},
-  {id:12,icon:'📈',title:'Ad Performance Monitor',desc:'Tracks ad spend and performance across Google and Meta, and sends daily alerts if ROAS drops below your threshold.',price:55,period:'/mo',category:'marketing',badge:'badge-popular',badgeText:'Popular'},
+  {
+    id:1,icon:'📧',title:'Email Sequence Automator',
+    pain:'Most leads go cold because nobody followed up fast enough. This automation follows up for you — instantly, personally, and at the exact right moment.',
+    desc:'Sends behaviour-triggered email sequences to every lead and customer based on what they click, open, or ignore — so the right message always lands at the right time. Replaces 50% of manual marketing work overnight.',
+    tiers:[{label:'Starter',price:39,detail:'Up to 500 contacts · 3 sequences'},{label:'Growth',price:149,detail:'Up to 5,000 contacts · Unlimited sequences + A/B testing'},{label:'Agency',price:399,detail:'Unlimited contacts · Multi-brand · White-label reports'}],
+    category:'marketing',badge:'badge-popular',badgeText:'Popular'
+  },
+  {
+    id:2,icon:'📱',title:'Social Media Auto-Poster',
+    pain:'You know you should be posting consistently. But between running your business and everything else, it just doesn\'t happen — and your profile looks dead.',
+    desc:'Schedules and publishes polished content across LinkedIn, Instagram, X, and Facebook from one content calendar. Maintains a professional brand presence 7 days a week without you lifting a finger.',
+    tiers:[{label:'Starter',price:29,detail:'3 platforms · 15 posts/mo'},{label:'Growth',price:99,detail:'6 platforms · Unlimited posts · Analytics'},{label:'Agency',price:249,detail:'Unlimited brands · Client dashboard · White-label'}],
+    category:'marketing',badge:'badge-mrr',badgeText:'MRR'
+  },
+  {
+    id:3,icon:'🎯',title:'Lead Scoring & Routing',
+    pain:'Your sales team wastes hours chasing tyre-kickers while hot leads go cold. Without scoring, every lead feels equal — and that\'s costing you real deals.',
+    desc:'Automatically scores every inbound lead based on their behaviour, company profile, and intent signals — then routes the hottest ones to the right rep instantly. Increases close rates by up to 62% in B2B pipelines.',
+    tiers:[{label:'Starter',price:99,detail:'Rule-based scoring · CRM sync · Up to 200 leads/mo'},{label:'Growth',price:299,detail:'Predictive AI scoring · Slack alerts · Up to 2,000 leads/mo'},{label:'Agency',price:699,detail:'Real-time intent scoring · Multi-pipeline · Custom models'}],
+    category:'sales',badge:'badge-popular',badgeText:'Popular'
+  },
+  {
+    id:4,icon:'💬',title:'AI Customer Support Bot',
+    pain:'Every unanswered message is a customer you\'re losing. But hiring a full support team is expensive — and they can\'t work 3am on a Sunday.',
+    desc:'A 24/7 intelligent AI agent that handles FAQs, order tracking, returns, and booking — then escalates the complex stuff to your team with full context. Your customers get instant answers. Your team stops drowning in repetitive tickets.',
+    tiers:[{label:'Starter',price:49,detail:'Up to 200 conversations/mo · FAQ + basic flows'},{label:'Growth',price:199,detail:'Up to 1,500 conversations/mo · CRM integration · Handoff to human'},{label:'Agency',price:499,detail:'Unlimited conversations · Custom training · Multi-brand'}],
+    category:'customer',badge:'badge-mrr',badgeText:'MRR'
+  },
+  {
+    id:5,icon:'🧾',title:'Automated Invoice Generator',
+    pain:'Late invoices mean late payments. If you\'re still sending invoices manually — or forgetting to — you\'re funding your clients\' cash flow at the expense of your own.',
+    desc:'Automatically creates, sends, and chases invoices based on project milestones, subscriptions, or trigger events. Cuts Days Sales Outstanding by up to 40% and eliminates costly billing errors.',
+    tiers:[{label:'Starter',price:25,detail:'Up to 20 invoices/mo · PDF + email delivery'},{label:'Growth',price:79,detail:'Unlimited invoices · Payment reminders · Xero/QuickBooks sync'},{label:'Agency',price:199,detail:'Multi-client billing · ERP integration · Revenue dashboards'}],
+    category:'finance',badge:'badge-new',badgeText:'New'
+  },
+  {
+    id:6,icon:'📦',title:'Inventory Alert System',
+    pain:'You ran out of your best-selling product on a Friday evening and didn\'t notice until Monday. That\'s not just lost revenue — that\'s customers who went to your competitor.',
+    desc:'Monitors stock levels in real time and fires reorder alerts or triggers automatic procurement before you ever hit zero. Eliminates stockouts and the "dead capital" cost of over-ordering.',
+    tiers:[{label:'Starter',price:49,detail:'1 warehouse · Email alerts · Up to 50 SKUs'},{label:'Growth',price:149,detail:'Multi-location · Auto-reorder triggers · Up to 500 SKUs'},{label:'Agency',price:399,detail:'IoT sync · Supplier API · Unlimited SKUs · Forecasting'}],
+    category:'ecommerce',badge:'badge-mrr',badgeText:'MRR'
+  },
+  {
+    id:7,icon:'🤝',title:'CRM Data Enrichment',
+    pain:'Your CRM is full of half-empty contacts — missing job titles, company sizes, and decision-maker info. Your team is either flying blind or spending hours on manual research.',
+    desc:'Automatically enriches every contact in your CRM with company size, industry, technology stack, LinkedIn profiles, and intent signals. Your data decays at 30% per year — this automation fights it automatically.',
+    tiers:[{label:'Starter',price:59,detail:'250 enrichments/mo · 10 data fields · Email + LinkedIn'},{label:'Growth',price:199,detail:'1,500 enrichments/mo · Technographics · CRM auto-sync'},{label:'Agency',price:499,detail:'Unlimited enrichments · Live intent signals · API access'}],
+    category:'sales',badge:'badge-new',badgeText:'New'
+  },
+  {
+    id:8,icon:'📊',title:'Weekly Business Report Bot',
+    pain:'You\'re running your business on gut feel because pulling reports from five different tools takes half a day — and you still don\'t get the full picture.',
+    desc:'Every Monday morning, a clean executive summary lands in your inbox: revenue, leads, support tickets, ad spend, and key KPIs — all aggregated automatically from your existing tools. Make faster, smarter decisions without leaving your inbox.',
+    tiers:[{label:'Starter',price:39,detail:'3 data sources · Weekly email digest'},{label:'Growth',price:99,detail:'Full tool stack · Daily or weekly · Slack delivery'},{label:'Agency',price:249,detail:'Custom KPIs · Client-branded reports · API sources'}],
+    category:'operations',badge:'badge-mrr',badgeText:'MRR'
+  },
+  {
+    id:9,icon:'🔔',title:'Abandoned Cart Recovery',
+    pain:'70% of online shoppers abandon their cart. That\'s not a traffic problem — that\'s money already inside your store that walked out the door without buying.',
+    desc:'Detects every abandoned cart and triggers a smart recovery sequence via email and SMS — with personalised product images, urgency messaging, and optional discount offers at the right moment. Recovers 5–15% of abandoned revenue on autopilot.',
+    tiers:[{label:'Starter',price:29,detail:'Email-only · 3-step sequence · Up to 200 recoveries/mo'},{label:'Growth',price:89,detail:'Email + SMS · Dynamic offers · Up to 2,000 recoveries/mo'},{label:'Agency',price:229,detail:'Omnichannel · A/B testing · Unlimited · Custom branding'}],
+    category:'ecommerce',badge:'badge-popular',badgeText:'Popular'
+  },
+  {
+    id:10,icon:'📋',title:'Job Application Screener',
+    pain:'"Easy Apply" has broken recruiting. You post one role and get 400 applications — 350 of which are completely irrelevant. Your team is buried before the real candidates even get a look.',
+    desc:'Automatically filters CVs, scores candidates against your exact criteria, sends pre-screening questions, and books interviews with the top matches. Cuts time-to-hire from weeks to days.',
+    tiers:[{label:'Starter',price:49,detail:'2 active roles · CV scoring · Email screening'},{label:'Growth',price:149,detail:'10 active roles · AI video screening · Calendar booking'},{label:'Agency',price:399,detail:'Unlimited roles · Multi-client · Compliance tools · ATS sync'}],
+    category:'hr',badge:'badge-new',badgeText:'New'
+  },
+  {
+    id:11,icon:'🌟',title:'Review Request Automation',
+    pain:'Your happy customers don\'t leave reviews — they just leave. Meanwhile, the one unhappy customer posted a 1-star review that\'s costing you new business every single day.',
+    desc:'Automatically sends a perfectly-timed review request after every purchase or completed service. Targets satisfied customers at their peak happiness. More 5-star reviews means better SEO, more trust, and more sales — on autopilot.',
+    tiers:[{label:'Starter',price:19,detail:'1 location · Google + 1 platform · 100 requests/mo'},{label:'Growth',price:59,detail:'5 locations · All platforms · Sentiment filtering · 1,000 requests/mo'},{label:'Agency',price:149,detail:'Unlimited locations · White-label · API + CRM sync'}],
+    category:'customer',badge:'badge-mrr',badgeText:'MRR'
+  },
+  {
+    id:12,icon:'📈',title:'Ad Performance Monitor',
+    pain:'You\'re spending money on ads every single day — but you only find out the campaign crashed when you check your account three days later. By then, you\'ve already wasted the budget.',
+    desc:'Monitors your Google and Meta ad performance in real time. The moment your ROAS drops, your CPA spikes, or your budget paces wrong — you get an instant alert before the damage compounds. Your insurance policy for ad spend.',
+    tiers:[{label:'Starter',price:39,detail:'1 ad account · Daily alerts · ROAS threshold monitoring'},{label:'Growth',price:99,detail:'5 ad accounts · Real-time alerts · Kill-switch automation'},{label:'Agency',price:249,detail:'Unlimited accounts · Client dashboards · Custom rules · API'}],
+    category:'marketing',badge:'badge-popular',badgeText:'Popular'
+  },
 ];
 
 const PACKAGES = {
-  individual:[
-    {name:'Starter',price:'49',period:'per month',tagline:'Automate your first workflow. See the difference in week one.',features:['1 active automation','Monthly performance report','Email support','Setup included','Cancel anytime'],featured:false,popular:false},
-    {name:'Growth',price:'129',period:'per month',tagline:'Stack automations to run your personal brand or solo business on autopilot.',features:['5 active automations','Bi-weekly check-ins','Priority email support','Free setup + integration','Access to full library','Cancel anytime'],featured:true,popular:true},
-    {name:'Pro',price:'249',period:'per month',tagline:'Full-stack personal automation — for high-performers who refuse to waste time.',features:['Unlimited automations','Weekly optimization calls','Dedicated account manager','Custom workflow design','API integrations included','White-glove onboarding'],featured:false,popular:false},
+  individual: [
+    {
+      name: "Starter",
+      price: "97",
+      period: "per month",
+      tagline: "Automate your first workflow. See the difference in week one.",
+      features: [
+        "1 active automation",
+        "Monthly performance report",
+        "Email support (48hr response)",
+        "Setup included",
+        "Cancel anytime",
+        "Bonus: 1 extra value automation",
+      ],
+      featured: false,
+      popular: false,
+    },
+    {
+      name: "Growth",
+      price: "247",
+      period: "per month",
+      tagline: "Stack automations to run your personal brand or solo business on autopilot.",
+      features: [
+        "5 active automations",
+        "Bi-weekly check-ins",
+        "Priority email support (24hr)",
+        "Free setup + integration",
+        "Access to full library",
+        "Cancel anytime",
+      ],
+      featured: true,
+      popular: true,
+    },
+    {
+      name: "Pro",
+      price: "497",
+      period: "per month",
+      tagline: "Full-stack personal automation — for high-performers who refuse to waste time.",
+      features: [
+        "Unlimited automations",
+        "Weekly optimization calls",
+        "Dedicated account manager",
+        "Custom workflow design",
+        "API integrations included",
+        "White-glove onboarding",
+      ],
+      featured: false,
+      popular: false,
+    },
   ],
-  business:[
-    {name:'Team',price:'299',period:'per month',tagline:'Automate your whole team\'s workflow — sales, ops, marketing, support.',features:['Up to 15 automations','Full team access','Monthly strategy session','CRM integration','Custom reporting dashboard','Slack / Teams integration'],featured:false,popular:false},
-    {name:'Scale',price:'699',period:'per month',tagline:'Built for businesses that are serious about removing every bottleneck.',features:['Up to 50 automations','Dedicated automation specialist','Bi-weekly strategy sessions','Custom AI model fine-tuning','Full API access','Multi-location support','SLA guarantee'],featured:true,popular:true},
-    {name:'Enterprise',price:'Custom',period:'bespoke pricing',tagline:'For large operations with complex, multi-department automation needs.',features:['Unlimited automations','Dedicated team of developers','Custom integrations & APIs','On-site / remote training','99.9% uptime SLA','24/7 support hotline','White-label option available'],featured:false,popular:false},
+  business: [
+    {
+      name: "Team",
+      price: "597",
+      period: "per month",
+      tagline: "Automate your whole team's workflow — sales, ops, marketing, support.",
+      features: [
+        "Up to 15 automations",
+        "Full team access",
+        "Monthly strategy session",
+        "CRM integration",
+        "Custom reporting dashboard",
+        "Slack / Teams integration",
+      ],
+      featured: false,
+      popular: false,
+    },
+    {
+      name: "Scale",
+      price: "1,297",
+      period: "per month",
+      tagline: "Built for businesses that are serious about removing every bottleneck.",
+      features: [
+        "Up to 50 automations",
+        "Dedicated automation specialist",
+        "Bi-weekly strategy sessions",
+        "Custom AI model fine-tuning",
+        "Full API access",
+        "Multi-location support",
+        "SLA guarantee",
+      ],
+      featured: true,
+      popular: true,
+    },
+    {
+      name: "Enterprise",
+      price: "Custom",
+      period: "bespoke pricing",
+      tagline: "For large operations with complex, multi-department automation needs.",
+      features: [
+        "Unlimited automations",
+        "Dedicated team of developers",
+        "Custom integrations & APIs",
+        "On-site / remote training",
+        "99.9% uptime SLA",
+        "24/7 support hotline",
+        "White-label option available",
+      ],
+      featured: false,
+      popular: false,
+    },
   ],
-  enterprise:[
-    {name:'Enterprise Core',price:'1,499',period:'per month',tagline:'Enterprise-grade automation infrastructure with dedicated support.',features:['Unlimited automations','Dedicated engineering team','Custom data pipelines','SSO & advanced security','SOC 2 compliant infrastructure','Monthly executive reports','Custom SLA'],featured:false,popular:false},
-    {name:'Enterprise Plus',price:'Custom',period:'fully bespoke',tagline:'Full technology partnership — we become your in-house automation arm.',features:['Unlimited everything','Embedded automation team','Quarterly roadmap planning','Custom AI model development','Regulatory compliance support','Board-level reporting','Partnership agreement'],featured:true,popular:true},
+  enterprise: [
+    {
+      name: "Enterprise Core",
+      price: "2,997",
+      period: "per month",
+      tagline: "Enterprise-grade automation infrastructure with dedicated support.",
+      features: [
+        "Unlimited automations",
+        "Dedicated engineering team",
+        "Custom data pipelines",
+        "SSO & advanced security",
+        "SOC 2 compliant infrastructure",
+        "Monthly executive reports",
+        "Custom SLA",
+      ],
+      featured: false,
+      popular: false,
+    },
+    {
+      name: "Enterprise Plus",
+      price: "Custom",
+      period: "fully bespoke",
+      tagline: "Full technology partnership — we become your in-house automation arm.",
+      features: [
+        "Unlimited everything",
+        "Embedded automation team",
+        "Quarterly roadmap planning",
+        "Custom AI model development",
+        "Regulatory compliance support",
+        "Board-level reporting",
+        "Partnership agreement",
+      ],
+      featured: true,
+      popular: true,
+    },
   ],
 };
+
 
 const INDUSTRY_DATA = {
   retail:{title:'Retail & E-Commerce',desc:'Automate your entire customer journey — from discovery to delivery to retention.',items:['Abandoned cart recovery sequences','Inventory reorder triggers','Product review collection','Personalized upsell flows','Seasonal campaign automation','Supplier communication bots']},
@@ -1072,7 +1280,7 @@ const WEBHOOKS = {
   purchase: 'https://hook.eu2.make.com/moxussem1s3sw3job5m3veb5b6svrmgq',
 
   // Fired when someone submits the Custom Build request form
-  consultation: 'https://hook.eu2.make.com/wk98kys8q1n87mq7j1b4qn3x84tacowm',
+  consultation: 'https://hook.eu2.make.com/wk98kys8q1n87mq7j1b4qn3x84tacowms',
 };
 // ─────────────────────────────────────────────────────────────
 
@@ -1105,19 +1313,37 @@ function renderAutos(){
     return matchCat&&matchSearch;
   });
   grid.innerHTML = filtered.length ? filtered.map(a=>`
-    <div class="automation-card">
+    <div class="automation-card" id="card-${a.id}">
       <div class="auto-top">
-        <div class="auto-icon">${a.icon}</div>
+        <div class="auto-icon" style="background:rgba(0,229,160,0.1)">${a.icon}</div>
         <span class="auto-badge ${a.badge}">${a.badgeText}</span>
       </div>
       <div class="auto-title">${a.title}</div>
+      <div class="auto-pain">${a.pain}</div>
       <div class="auto-desc">${a.desc}</div>
-      <div class="auto-footer">
-        <div class="auto-price">$${a.price}<span>${a.period}</span></div>
-        <button class="auto-buy" onclick="openModal(${a.id})">Subscribe</button>
+      <div class="auto-tier-toggle">
+        ${a.tiers.map((t,i)=>`<button class="tier-btn ${i===0?'active':''}" onclick="selectTier(${a.id},${i},this)">${t.label}</button>`).join('')}
+      </div>
+      <div class="tier-detail" id="tier-detail-${a.id}">${a.tiers[0].detail}</div>
+      <div class="auto-footer" style="margin-top:14px">
+        <div class="auto-price" id="tier-price-${a.id}">$${a.tiers[0].price}<span>/mo</span></div>
+        <button class="auto-buy" id="tier-buy-${a.id}" onclick="openModal(${a.id})">Get Started →</button>
       </div>
     </div>
   `).join('') : '<p style="color:var(--muted);grid-column:1/-1;text-align:center;padding:40px">No automations match your search. <a href="#custom" style="color:var(--accent)">Request a custom build →</a></p>';
+}
+
+// Track selected tiers per automation
+const selectedTiers = {};
+
+function selectTier(id, idx, btn) {
+  selectedTiers[id] = idx;
+  const a = AUTOMATIONS.find(x => x.id === id);
+  const tier = a.tiers[idx];
+  document.getElementById('tier-price-' + id).innerHTML = '$' + tier.price + '<span>/mo</span>';
+  document.getElementById('tier-detail-' + id).textContent = tier.detail;
+  const card = document.getElementById('card-' + id);
+  card.querySelectorAll('.tier-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
 }
 
 function filterAutos(){renderAutos()}
@@ -1194,10 +1420,12 @@ function renderTestimonials(){
 // ─── MODALS ───
 function openModal(id){
   const a = AUTOMATIONS.find(x=>x.id===id);
+  const tierIdx = selectedTiers[id] || 0;
+  const tier = a.tiers[tierIdx];
   currentAutoId=id;
-  document.getElementById('modalTitle').textContent = 'Subscribe: '+a.title;
-  document.getElementById('modalDesc').textContent = 'Monthly subscription. Setup included. Cancel anytime.';
-  document.getElementById('modalPrice').textContent = '$'+a.price+'/mo';
+  document.getElementById('modalTitle').textContent = a.title + ' — ' + tier.label;
+  document.getElementById('modalDesc').textContent = tier.detail + ' · Monthly subscription. Setup included. Cancel anytime.';
+  document.getElementById('modalPrice').textContent = '$'+tier.price+'/mo';
   document.getElementById('purchaseSuccess').style.display='none';
   document.getElementById('purchaseModal').classList.add('open');
 }
@@ -1220,8 +1448,9 @@ function completePurchase(){
   const biz=document.getElementById('mBiz').value;
   if(!name||!email){alert('Please fill in your name and email.');return;}
 
-  // ── Send to Make.com ──
   const auto = currentAutoId ? AUTOMATIONS.find(x=>x.id===currentAutoId) : null;
+  const tierIdx = currentAutoId ? (selectedTiers[currentAutoId] || 0) : 0;
+  const tier = auto ? auto.tiers[tierIdx] : null;
   sendToMake(WEBHOOKS.purchase, {
     event: 'purchase',
     timestamp: new Date().toISOString(),
@@ -1230,6 +1459,7 @@ function completePurchase(){
     business: biz || null,
     product: document.getElementById('modalTitle').textContent,
     price: document.getElementById('modalPrice').textContent,
+    tier: tier ? tier.label : null,
     automation_id: currentAutoId || null,
     automation_title: auto ? auto.title : null,
     automation_category: auto ? auto.category : null,
